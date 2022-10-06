@@ -3,23 +3,23 @@ import cv2
 
 
 # ອ່ານວິດີໂອ
-cap = cv2.VideoCapture('images/Video.mp4')
+cap = cv2.VideoCapture('images/Mark.mp4')
 
 # ອ່ານ File ສຳຫຼັບ Classification
-face_cascade = cv2.CascadeClassifier('detect/haarcascade_frontalface_default.xml')
+eye_cascade = cv2.CascadeClassifier('detect/haarcascade_eye_tree_eyeglasses.xml')
 
 # ສະແດງຜົນວິດີໂອ
 while (cap.isOpened()):
     check, frame = cap.read()
     if check == True:
         gray_vdo = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-        # ຈຳແນກໃບໜ້າ
+        # ຈຳແນກດວງຕາ
         scaleFactory = 1.2
         minNeighber = 5
-        face_detect = face_cascade.detectMultiScale(
+        eye_detect = eye_cascade.detectMultiScale(
             gray_vdo, scaleFactory, minNeighber)
-        # ສະແດງຕຳແໜ່ງທີ່ພົບໃບໜ້າ
-        for (x, y, w, h) in face_detect:
+        # ສະແດງຕຳແໜ່ງທີ່ພົບເຫັນດວງຕາ
+        for (x, y, w, h) in eye_detect:
             cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), thickness=5)
             cv2.imshow('Output', frame)
         if cv2.waitKey(5) & 0xFF == ord('e'):
