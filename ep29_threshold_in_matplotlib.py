@@ -1,6 +1,6 @@
-# Function Threshold in OpenCV
+# Function Threshold in Matplotlib
 import cv2
-
+import matplotlib.pyplot as plt
 
 gray_img = cv2.imread('images/gradient.png')
 
@@ -10,15 +10,15 @@ thresh, result3 = cv2.threshold(gray_img, 128, 255, cv2.THRESH_TRUNC)
 thresh, result4 = cv2.threshold(gray_img, 128, 255, cv2.THRESH_TOZERO)
 thresh, result5 = cv2.threshold(gray_img, 128, 255, cv2.THRESH_TOZERO_INV)
 
-cv2.imshow('Original', gray_img)
-cv2.imshow('Binary', result1)
-cv2.imshow('Binary_INV', result2)
-cv2.imshow('Binary_Trunc', result3)
-cv2.imshow('Binary_Tozero', result4)
-cv2.imshow('Binary_Tozero_INV', result5)
 
-# img = cv2.cvtColor(gray_img, cv2.COLOR_BGR2RGB)
-# plt.imshow(img)
-# plt.show()
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+images = [gray_img, result1, result2, result3, result4, result5]
+title = ['Original', 'Binary', 'Binary_INV',
+         'Binary_Trunc', 'Binary_Tozero', 'Binary_Tozero_INV']
+
+for i in range(len(images)):
+    plt.subplot(2, 3, i+1)
+    plt.imshow(images[i])
+    plt.title(title[i])
+    plt.xticks([]), plt.yticks([])
+
+plt.show()
